@@ -16,6 +16,7 @@ export default class ChatDetail extends Component {
     super(props);
     this.state = {
       sound: null,
+      isRecording: false,
       messages: [{
         _id: 1,
         text: 'Let\'s go on our grammar lesson!',
@@ -158,6 +159,7 @@ playSound = async (uri) =>{
         playsInSilentModeIOS: true,
       }); 
       console.log('Starting recording..');
+      this.setState({isRecording: true});
       const { recording } = await Audio.Recording.createAsync(
          Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
       );
@@ -172,6 +174,7 @@ playSound = async (uri) =>{
   stopRecording = async () => {
     console.log('Stopping recording..');
     await this.recording.stopAndUnloadAsync();
+    this.setState({isRecording: false});
     const uri = this.recording.getURI(); 
     console.log('Recording stopped and stored at', uri);
      const { sound } = await Audio.Sound.createAsync({
@@ -451,10 +454,26 @@ uploadImageToDB = async (fileURI) => {
         )
   }
 
+  renderFooter(props) {
+    if (this.state.isRecording) {
+      return (
+      <View>
+      <FontAwesome5
+            name={"microphone"}
+            size={48}
+            color= {"rgba(0,0,255,0.6)"}
+            tyle={{position: 'absolute',marginBottom:200,left: "50%"}}
+          />
+        </View>
+      );
+    }
+    return null
+  }
+
   render() {
 
     return (
-    
+
        <GiftedChat
             messages={this.state.messages}
             showAvatarForEveryMessage={true}
@@ -468,40 +487,8 @@ uploadImageToDB = async (fileURI) => {
             renderActions={(props) => this.renderActions(props)}
             renderBubble={(props) => this.renderBubble(props)}
             renderMessageAudio={(props) => this.renderMessageAudio(props)}
-      />    
-      /*<View style={styles.container}>
-        <StatusBar style="light" />
-        <View style={styles.topBar}>
-          <View style={styles.topBarSection}>
-            <Image
-              source={require("../assets/team.png")}
-              style={styles.groupImage}
-            />
-            <View>
-              <Text style={styles.groupTitle}>{groupName}</Text>
-              <Text style={styles.groupDate}>{createdAt}</Text>
-            </View>
-          </View>
-        </View>
-        <Text> ChatDetail </Text>
-        <View style={styles.messageBox}>
-          <TextInput
-            style={styles.messageInput}
-            keyboardType="default"
-            placeholder="Type a message"
-            value={this.state.userMessage}
-            onChangeText={(userMessage) => this.setState({ userMessage })}
-          />
-          <FAB
-            style={styles.fab}
-            icon="send"
-            onPress={() => {
-              console.log(userMessage);
-              this.setState({ userMessage: null });
-            }}
-          />
-        </View>
-      </View>*/
+            renderFooter={(props) => this.renderFooter(props)}
+      /> 
     );
   }
 }

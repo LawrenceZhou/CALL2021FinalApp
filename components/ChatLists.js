@@ -27,6 +27,73 @@ import * as firebase from "firebase";
 
 import * as ImagePicker from "expo-image-picker";
 
+const users = [
+  {identity: "tutor",
+  name: "Amrita Conner",
+  subtitle: "See you next Thursday!",
+  statusColor: "#f5deb3",
+  unread: 0,
+  date: new Date('January 9, 2022 00:12:00'),
+  avatar: 'https://s3.us-east-2.amazonaws.com/storage-app-dev/cb62d4exdk8t4gnhf/thumbnail-26170527_10214525576748161_8444045049145038093_o.jpg',
+  },
+  {identity: "tutor",
+  name: "George",
+  subtitle: "Thanks",
+  statusColor: "#f5deb3",
+  unread: 0,
+  date: new Date('January 3, 2022 00:12:00'),
+  avatar: 'https://placeimg.com/140/140/people',
+  },
+  {identity: "native",
+  name: "S. Chung",
+  subtitle: "^>^",
+  statusColor: "#b0c4de",
+  unread: 0,
+  date: new Date('January 1, 2022 00:12:00'),
+  avatar: 'https://placeimg.com/140/142/people',
+  },
+  {identity: "user",
+  name: "東大　花子",
+  subtitle: "ありがとう！",
+  statusColor: "white",
+  unread: 0,
+  date: new Date('January 1, 2022 00:12:00'),
+  avatar: 'https://placeimg.com/140/143/people',
+  },
+  {identity: "native",
+  name: "Eva-Rose Stott",
+  subtitle: "I just don't understand... Would you please give more details?",
+  statusColor: "#b0c4de",
+  unread: 0,
+  date: new Date('December 30, 2021 00:12:00'),
+  avatar: 'https://placeimg.com/144/140/people',
+  },
+  {identity: "native",
+  name: "Debbie Fulton",
+  subtitle: "Are you available now?",
+  statusColor: "#b0c4de",
+  unread: 1,
+  date: new Date('October 15, 2021 00:12:00'),
+  avatar: 'https://placeimg.com/150/150/people',
+  },
+  {identity: "user",
+  name: "文京太郎",
+  subtitle: "是非。",
+  statusColor: "white",
+  unread: 0,
+  date: new Date('March 17, 2021 00:12:00'),
+  avatar: 'https://placeimg.com/140/138/people',
+  },
+  {identity: "native",
+  name: "Finn Ritter",
+  subtitle: "Thx!!!",
+  statusColor: "#b0c4de",
+  unread: 0,
+  date: new Date('October 10, 2019 00:12:00'),
+  avatar: 'https://placeimg.com/140/137/people',
+  },
+]
+
 export default class ChatLists extends Component {
   constructor(props) {
     super(props);
@@ -171,140 +238,36 @@ export default class ChatLists extends Component {
             />
           </View>
         <ScrollView >
-        <TouchableOpacity
+        {users.map((user)=>{
+                return(
+                  <TouchableOpacity
                   onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-        >  
-        <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/144/any' }}
-            alt={'Reactjs'}
-            title={'User1'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-
-       <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
+                    this.props.navigation.navigate("UserChatDetail", {
+                      chatName: user.name+"("+user.identity+")",
+                      userNumber: 1,
                     });
                   }}
                 >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/143/any' }}
-            alt={'Reactjs'}
-            title={'User2'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/142/any' }}
-            alt={'Reactjs'}
-            title={'User3'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/140/any' }}
-            alt={'Reactjs'}
-            title={'user3'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/141/any' }}
-            alt={'Reactjs'}
-            title={'User4'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/145/any' }}
-            alt={'Reactjs'}
-            title={'User5'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/146/any' }}
-            alt={'Reactjs'}
-            title={'User6'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: 'https://placeimg.com/140/147/any' }}
-            alt={'Reactjs'}
-            title={'User7'}
-            subtitle={'What are you doing?'}
-            date={new Date()}
-            unread={0} />
-        </TouchableOpacity>
-        
+                  <ChatItem
+                    avatar={{ uri: user.avatar }}
+                    alt={'user'}
+                    title={user.name}
+                    subtitle={user.subtitle}
+                    date={user.date}
+                    unread={user.unread} 
+                    statusText={user.identity[0]}
+                    statusColor={user.statusColor}
+                  />
+                </TouchableOpacity>
+                )
+              }
+                )}
 
     </ScrollView>
     <FAB
             style={{position: "absolute", left: 0, bottom: 0, margin: 20, backgroundColor: "blue",}}
-            icon="robot"
-            onPress={() => {this.props.navigation.navigate("ChatDetail", {chatName: "AI Bot",});}}
+            icon="language-swift"
+            onPress={() => {this.props.navigation.navigate("BotChatDetail", {chatName: "Topparrot",});}}
           />
     </View>
 

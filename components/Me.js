@@ -38,19 +38,19 @@ import { ChatItem } from 'react-chat-elements/native';
 const DATA = [
   {
     title: "Grammar",
-    data: [{title: "Grammar1", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/learning.png"},
-          {title: "Grammar2", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/learning.png"},
-          {title: "Grammar3", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/learning.png"},]
+    data: [{title: "Plural Rules, -s", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/learning.png", navigation: "Grammar"},
+          {title: "-ing Form", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/learning.png", navigation: "Grammar"},
+          {title: "The Comparative, -er", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/learning.png", navigation: "Grammar"},]
   },
   {
     title: "Q&A",
-    data: [{title: "Q&A1", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/qa.png"},
-          {title: "Q&A2", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/qa.png"},
-          {title: "Q&A3", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/qa.png"},]
+    data: [{title: "How do you say this in English (US)? 氷少なめでお願いします。（Starbucks でアイスコーヒー頼む時）", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/qa.png", navigation: "QuestionDetail"},
+          {title: "What is the difference between class and course?", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/qa.png", navigation: "QuestionDetail"},
+          {title: "'I like TV.' and 'I like watching TV', Which sentence is more correct, more natural?", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/qa.png", navigation: "QuestionDetail"},]
   },
   {
     title: "Feedback",
-    data: [{title: "Feedback1", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/feedback.png"}]
+    data: [{title: "13th Jan. Video Feedback with Amrita Conner", logo: "https://museumpalazzo.s3.us-west-2.amazonaws.com/feedback.png", navigation: "Video"}]
   },
 ];
 
@@ -96,7 +96,7 @@ export default class Me extends Component {
 
         this.setState({
           device_model_name: data1.device.device_model_name,
-          imageURI: data1.profile_url,
+          imageURI: "http://yijunzhou.xyz/assets/img/profile.jpg",
         });
       })
       .catch((error) => {
@@ -238,12 +238,12 @@ export default class Me extends Component {
                   style={{ width: 80, height: 80, borderRadius: 40 }}
                 />
 
-                <Text style={styles.email}> {email} </Text>
+                <Text style={styles.email}> Lawrence Zhou </Text>
               </View>
 
               <View style={{flex: 1, flexDirection: "row", marginTop: 20}}>
-                <Entypo name="open-book" size={20} style={{marginRight: 5}} color="white" />
-                <Text style={{color: "white"}}>English</Text>
+                <Entypo name="language" size={20} style={{marginRight: 5}} color="white" />
+                <Text style={{color: "white", marginTop: 3}}>Japanese</Text>
               </View>
 
               <View style={{flex: 1, flexDirection: "row"}}>
@@ -274,7 +274,7 @@ export default class Me extends Component {
       renderItem={({ item }) => 
         <TouchableOpacity
                   onPress={() => {
-                    this.props.navigation.navigate("Grammar", {});
+                    this.props.navigation.navigate(item.navigation, {});
                   }}
                 >  
             <ChatItem
@@ -295,39 +295,26 @@ export default class Me extends Component {
             <ScrollView >
             <TouchableOpacity
                   onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
+                    this.props.navigation.navigate("UserChatDetail", {
+                      chatName: "Amrita Conner(tutor)",
                     });
                   }}
                 >  
             <ChatItem
             avatar={{ uri: "https://museumpalazzo.s3.us-west-2.amazonaws.com/schedule.png" }}
             alt={'Reactjs'}
-            title={"Tomorrow 17:00 ~ 18:00"}
+            title={"Today 13:30 with Amrita Conner"}
             date={null}
             unread={0} />
         </TouchableOpacity>
-        <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("ChatDetail", {
-                      chatName: "1st Group",
-                    });
-                  }}
-                >  
-            <ChatItem
-            avatar={{ uri: "https://museumpalazzo.s3.us-west-2.amazonaws.com/schedule.png" }}
-            alt={'Reactjs'}
-            title={"Tomorrow 18:30 ~ 19:00"}
-            date={null}
-            unread={0} />
-        </TouchableOpacity>
+        
         </ScrollView >
           </View>
 
            <FAB
             style={{position: "absolute", left: 0, bottom: 0, margin: 20, backgroundColor: "blue",}}
-            icon="robot"
-            onPress={() => {this.props.navigation.navigate("ChatDetail", {chatName: "AI Bot",});}}
+            icon="language-swift"
+            onPress={() => {this.props.navigation.navigate("BotChatDetail", {chatName: "Topparrot",});}}
           />
       </View>
 

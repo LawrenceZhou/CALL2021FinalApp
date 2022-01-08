@@ -8,6 +8,59 @@ import { MessageBox } from 'react-chat-elements/native';
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+const messages = [
+
+  {
+    title: 'Lawrence Zhou',
+    text: "How do you say this in English (US)? 氷少なめでお願いします。（Starbucks でアイスコーヒー頼む時）",
+    dateString: 'January 12, 2022 10:05',
+    avatar: 'http://yijunzhou.xyz/assets/img/profile.jpg',
+  },
+
+  {
+    title: 'Leanne',
+    text: "'I would like a little bit ice.'と思います。",
+    dateString: 'January 12, 2022 10:07',
+    avatar: 'https://placeimg.com/140/140/any',
+  },
+
+  {
+    title: 'Lawrence Zhou',
+    text: "Thanks! But can I say 'less ice please'?",
+    dateString: 'January 12, 2022 10:05',
+    avatar: 'http://yijunzhou.xyz/assets/img/profile.jpg',
+  },
+
+  {
+    title: 'Leanne',
+    text: "'Ah yes! You can say that:)",
+    dateString: 'January 12, 2022 10:09',
+    avatar: 'https://placeimg.com/140/140/any',
+  },
+
+  {
+    title: 'Toshiki',
+    text: "'How about 'light ice please'?",
+    dateString: 'January 12, 2022 10:11',
+    avatar: 'https://placeimg.com/140/142/any',
+  },
+
+  {
+    title: 'Toshiki',
+    text: "'Cause the staff of Starbucks said that sounds like 'light'. But I cannot hear it clearly...",
+    dateString: 'January 12, 2022 10:11',
+    avatar: 'https://placeimg.com/140/142/any',
+  },
+
+  {
+    title: 'Leanne',
+    text: "You can say that too! I hear ppl say that",
+    dateString: 'January 12, 2022 10:11',
+    avatar: 'https://placeimg.com/140/140/any',
+  },
+      
+]
+
 
 export default class QuestionDetail extends Component {
   constructor(props) {
@@ -203,25 +256,28 @@ append= (message) => {this.ref.push(message)};
   render() {
 
     return (
-     
+  <View style={{flex: 1}}>      
      <View>
-      <MessageBox
-    position={'left'}
-    type={'text'}
-    title={'User1'}
-    text={'Question Content'}
-    date={new Date()}
-    dateString={"17:32"}
-    avatar={{ uri: 'https://placeimg.com/140/144/any' }}
-    />
 
-    <MessageBox
-    position={'left'}
-    type={'text'}
-    avatar={{ uri: 'https://placeimg.com/140/145/any' }}
-    title={'Reply user name'}
-    dateString={"17:35"}
-    text={'Tempor duis do voluptate enim duis velit veniam aute ullamco dolore duis irure.'}/>
+       {messages.map((message)=>{
+          return(
+            <MessageBox
+              position={'left'}
+              type={'text'}
+              title={message.title}
+              text={message.text}
+              dateString={message.dateString}
+              avatar={{uri: message.avatar}}
+            />)})
+        }
+
+        </View>
+        <FAB
+            style={{position: "absolute", left: 0, bottom: 80, margin: 20, backgroundColor: "blue",}}
+            icon="language-swift"
+            onPress={() => {this.props.navigation.navigate("BotChatDetail", {chatName: "Topparrot",});}}
+          />
+
         </View>
       /*<View style={styles.container}>
         <StatusBar style="light" />

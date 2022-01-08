@@ -35,6 +35,59 @@ import { convertEpochToDateMonthYear } from "../logic/helpers";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 
+const Questions = {
+  "Hottest": [
+    {
+      title: "What is the difference between venture and startup?",
+      tag: "Business",
+      responses: 9,
+    },
+    {
+      title: "'I like TV.' and 'I like watching TV', Which sentence is more correct, more natural?",
+      tag: "Life",
+      responses: 4,
+    },
+    {
+      title: "How do you say this in English (US)? ホテルのプールが使えるかどうか、ホテルに電話して聞いてみるね。",
+      tag: "Travel",
+      responses: 8,
+    },
+  ],
+  "Newest": [
+    {
+      title: "How do you say this in English (US)? 氷少なめでお願いします。（Starbucks でアイスコーヒー頼む時）",
+      tag: "Life",
+      responses: 1,
+    },
+    {
+      title: "Is the use of 'ASAP' common in daily life?",
+      tag: "Life",
+      responses: 2,
+    },
+    {
+      title: "What TV shows are popular in US recently?(2022)",
+      tag: "Art",
+      responses: 3,
+    },
+  ],
+  "Normal": [
+    {
+      title: "Is this natural in American English? 'My wife and I always exchange anniversary gifts, together with those for our birthdays and Christmas.'",
+      tag: "Life",
+      responses: 6,
+    },
+    {
+      title: "What is the difference between class and course?",
+      tag: "Education",
+      responses: 2,
+    },
+    {
+      title: "What one to use when I want to cite some other work on the similar topic, 'Related Work' or 'Relative Work'.",
+      tag: "Research",
+      responses: 4,
+    },
+  ],
+}
 export default class Forum extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +103,9 @@ export default class Forum extends Component {
       loading: false,
       loading_dialog_text: "",
       query: null,
+      type: "Hottest",
+      topQuestions: Questions["Hottest"],
+      btmQuestions: Questions["Normal"],
     };
 
   }
@@ -231,6 +287,11 @@ export default class Forum extends Component {
 
   onChangeSearch(query) {
     this.setState({query: query});
+  }
+
+  selectType(type) {
+    this.setState({type: type, topQuestions: Questions[type]});
+    console.log(type, Questions[type]);
   } 
 
   render() {
@@ -312,85 +373,43 @@ export default class Forum extends Component {
               value={this.state.query}
             />
           </View>
-          <ScrollView style={{marginHorizontal: 20, width:"90%"}}>
+          <ScrollView style={{flexDirection:"column", flex: 1, marginHorizontal: 20, width:"90%"}}>
           <View style={{flexDirection: "row", width:"100%"}}>
-            <Chip style={{margin: 2 }} mode="outlined" onPress={() => console.log('Pressed')}>Hottest</Chip>
-            <Chip style={{margin: 2 }} mode="outlined" onPress={() => console.log('Pressed')}>Newest</Chip>
+            <Chip style={{margin: 2 }} mode="outlined" selected={this.state.type=="Hottest"} onPress={() => this.selectType('Hottest')}>Hottest</Chip>
+            <Chip style={{margin: 2 }} mode="outlined"  selected={this.state.type=="Newest"} onPress={() => this.selectType('Newest')}>Newest</Chip>
           </View>
 
           <View>
+             {this.state.topQuestions.map((question)=>{
+                return(
 
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate("QuestionDetail", {});
                   }}
                   style={{
-                    flexDirection: "row",
                     alignItems: "center",
                     marginTop: 10,
                     marginBottom: 10,
-
                     width: "100%",
                   }}
                 >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
+                  <View style={{  flex:0, width: "100%", marginVertical: 0}}>
+                      <View style={{backgroundColor:"white", width: "100%"}}>
+                      <Title style={{marginLeft: 10, color: "black"}}>{question.title}</Title>
+                      <View style={{flexDirection: 'row', marginVertical: 3}}><FontAwesome5 name="tags" size={14} style={{marginLeft: 20, marginRight: 10, marginTop: 2}} color="grey" />
+                        <View style={{backgroundColor: "#d9138a", borderRadius: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>{question.tag}</Text></View>         
+                      </View>
                       <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
                         <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
+                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>{question.responses}</Text></View>
                       </View>
                       </View>
                   </View>
                 </TouchableOpacity>
+                )}
+              )}
 
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("QuestionDetail", {});
-                  }}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                    marginBottom: 10,
-
-                    width: "100%",
-                  }}
-                >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
-                      <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
-                        <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
-                      </View>
-                      </View>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("QuestionDetail", {});
-                  }}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                    marginBottom: 10,
-
-                    width: "100%",
-                  }}
-                >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
-                      <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
-                        <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
-                      </View>
-                      </View>
-                  </View>
-                </TouchableOpacity>
           </View>
 
           <View style={{flexDirection: "row", width:"100%"}}>
@@ -401,132 +420,42 @@ export default class Forum extends Component {
               <Chip style={{margin: 2 }} icon="home" mode="outlined" onPress={() => console.log('Pressed')}>Life</Chip>
               <Chip style={{margin: 2 }} icon="movie" mode="outlined" onPress={() => console.log('Pressed')}>Art</Chip>
               <Chip style={{margin: 2 }} icon="airplane" mode="outlined" onPress={() => console.log('Pressed')}>Travel</Chip>
-              <Chip style={{margin: 2 }} icon="briefcase" mode="outlined" onPress={() => console.log('Pressed')}>Work</Chip>
+              <Chip style={{margin: 2 }} icon="briefcase" mode="outlined" onPress={() => console.log('Pressed')}>Business</Chip>
               <Chip style={{margin: 2 }} icon="library" mode="outlined" onPress={() => console.log('Pressed')}>Research</Chip>
          
             </ScrollView>
           </View>
 
           <View>
-            <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("QuestionDetail", {});
-                  }}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                    marginBottom: 10,
-
-                    width: "100%",
-                  }}
-                >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
-                      <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
-                        <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
-                      </View>
-                      </View>
-                  </View>
-                </TouchableOpacity>
+            {this.state.btmQuestions.map((question)=>{
+                return(
 
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate("QuestionDetail", {});
                   }}
                   style={{
-                    flexDirection: "row",
                     alignItems: "center",
                     marginTop: 10,
                     marginBottom: 10,
-
                     width: "100%",
                   }}
                 >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
+                  <View style={{  flex:0, width: "100%", marginVertical: 0}}>
+                      <View style={{backgroundColor:"white", width: "100%"}}>
+                      <Title style={{marginHorizontal: 10, color: "black"}}>{question.title}</Title>
+                      <View style={{flexDirection: 'row', marginVertical: 3}}><FontAwesome5 name="tags" size={14} style={{marginLeft: 20, marginRight: 10, marginTop: 2}} color="grey" />
+                        <View style={{backgroundColor: "#d9138a", borderRadius: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>{question.tag}</Text></View>         
+                      </View>
                       <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
                         <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
+                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>{question.responses}</Text></View>
                       </View>
                       </View>
                   </View>
                 </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("QuestionDetail", {});
-                  }}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                    marginBottom: 10,
-
-                    width: "100%",
-                  }}
-                >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
-                      <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
-                        <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
-                      </View>
-                      </View>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("QuestionDetail", {});
-                  }}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                    marginBottom: 10,
-
-                    width: "100%",
-                  }}
-                >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
-                      <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
-                        <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
-                      </View>
-                      </View>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  onPress={() => {
-                    this.props.navigation.navigate("QuestionDetail", {});
-                  }}
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 10,
-                    marginBottom: 10,
-
-                    width: "100%",
-                  }}
-                >  
-                  <View style={{flex: 1, width: "100%", height: 60, marginVertical: 0}}>
-                      <View style={{backgroundColor:"white", width: "100%", height: "100%"}}>
-                      <Title style={{marginLeft: 10, color: "black"}}>Question Title</Title>         
-                      <View style={{flexDirection: 'row', marginVertical: 3, marginLeft: 10}}>
-                        <Text style={{marginLeft: 10, color: "grey"}}>Responses: </Text>
-                        <View style={{backgroundColor:"orange", borderRadius: 4, marginHorizontal: 4, paddingHorizontal: 6}}><Text style={{color: "white", fontSize: 14 }}>8</Text></View>
-                      </View>
-                      </View>
-                  </View>
-                </TouchableOpacity>
+                )}
+              )}
             
           </View>
           </ScrollView>
@@ -581,8 +510,8 @@ export default class Forum extends Component {
 
           <FAB
             style={{position: "absolute", left: 0, bottom: 0, margin: 20, backgroundColor: "blue",}}
-            icon="robot"
-            onPress={() => {this.props.navigation.navigate("ChatDetail", {chatName: "AI Bot",});}}
+            icon="language-swift"
+            onPress={() => {this.props.navigation.navigate("BotChatDetail", {chatName: "Topparrot",});}}
           />
 
         </View>

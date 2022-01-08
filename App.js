@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,7 @@ import {
   Clipboard,
 } from "react-native";
 import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import * as firebase from "firebase";
 import { firebaseConfig } from "./logic/config";
 
@@ -17,7 +18,9 @@ import Login from "./components/Login";
 import ForgotPassword from "./components/ForgotPassword";
 import Loading from "./components/Loading";
 import Register from "./components/Register";
-import ChatDetail from "./components/ChatDetail";
+import GroupChatDetail from "./components/GroupChatDetail";
+import UserChatDetail from "./components/UserChatDetail";
+import BotChatDetail from "./components/BotChatDetail";
 import QuestionDetail from "./components/QuestionDetail";
 import Grammar from "./components/Grammar";
 import VideoDetail from "./components/VideoDetail";
@@ -80,7 +83,42 @@ if (Platform.OS === "android") {
   };
 }
 
-export default function App() {
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      grammarLiked: false,
+      questionLiked: false,
+      videoLiked: false,
+    };
+  }
+
+  clickGrammarLike() {
+      if (!this.state.grammarLiked) {
+         alert("You Liked this grammar!");
+      }
+      this.setState({grammarLiked: !this.state.grammarLiked});
+  }
+
+  clickQuestionLike() {
+      if (!this.state.questionLiked) {
+         alert("You Liked this question!");
+      }
+      this.setState({questionLiked: !this.state.questionLiked});
+  }
+
+  clickVideoLike() {
+      if (!this.state.videoLiked) {
+         alert("You Liked this Videocall Feedback!");
+      }
+      this.setState({videoLiked: !this.state.videoLiked});
+  }
+
+  clickVideoDownload() {
+      alert("VideoCall Feedback is downloaded!");
+  }
+
+  render(){
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: true }}>
@@ -88,14 +126,17 @@ export default function App() {
         <Stack.Screen name="Login" options={{headerShown: false}} component={Login} />
         <Stack.Screen name="Register" options={{headerShown: false}} component={Register} />
         <Stack.Screen name="HomeTab" options={{headerShown: false}} component={HomeTab} />
-        <Stack.Screen name="ChatDetail" component={ChatDetail} options={({ route }) => ({headerBackTitle: "Back", title: route.params.chatName+"("+route.params.userNumber+")", headerRight: () => (<Feather name="users" size={28} style={{marginHorizontal: 10, marginTop: 2}} color={"rgb(10, 132, 255)"} />) })} />
-        <Stack.Screen name="QuestionDetail" component={QuestionDetail} options={({ route }) => ({headerBackTitle: "Back", title: "Question Details", headerRight: () => (<Feather name="star" size={28} style={{marginHorizontal: 10, marginTop: 2}} color={"rgb(10, 132, 255)"} />) })} />
-        <Stack.Screen name="Grammar" component={Grammar} options={({ route }) => ({headerBackTitle: "Back", title: "Grammar", headerRight: () => (<Feather name="star" size={28} style={{marginHorizontal: 10, marginTop: 2}} color={"rgb(10, 132, 255)"} />) })} />
-        <Stack.Screen name="Video" component={VideoDetail} options={({ route }) => ({headerBackTitle: "Back", title: "Video Call" })} />
+        <Stack.Screen name="GroupChatDetail" component={GroupChatDetail} options={({ route }) => ({headerBackTitle: "Back", title: route.params.chatName+"("+route.params.userNumber+")", headerRight: () => (<Feather name="users" size={28} style={{marginHorizontal: 10, marginTop: 2}} color={"rgb(10, 132, 255)"} />) })} />
+        <Stack.Screen name="UserChatDetail" component={UserChatDetail} options={({ route }) => ({headerBackTitle: "Back", title: route.params.chatName, headerRight: () => (<Feather name="more-horizontal" size={28} style={{marginHorizontal: 10, marginTop: 2}} color={"rgb(10, 132, 255)"} />) })} />
+        <Stack.Screen name="BotChatDetail" component={BotChatDetail} options={({ route }) => ({headerBackTitle: "Back", title: route.params.chatName, headerRight: () => (<Feather name="more-horizontal" size={28} style={{marginHorizontal: 10, marginTop: 2}} color={"rgb(10, 132, 255)"} />) })} />
+        <Stack.Screen name="QuestionDetail" component={QuestionDetail} options={({ route }) => ({headerBackTitle: "Back", title: "Question Details", headerRight: () => (<FontAwesome name={this.state.questionLiked?"star":"star-o"} size={28} style={{marginHorizontal: 10, marginTop: 2}} onPress={() => {this.clickQuestionLike()}} color={"rgb(10, 132, 255)"} />) })} />
+        <Stack.Screen name="Grammar" component={Grammar} options={({ route }) => ({headerBackTitle: "Back", title: "Grammar", headerRight: () => (<FontAwesome name={this.state.grammarLiked?"star":"star-o"} size={28} style={{marginHorizontal: 10, marginTop: 2}} onPress={() => {this.clickGrammarLike()}} color={"rgb(10, 132, 255)"} />) })} />
+        <Stack.Screen name="Video" component={VideoDetail} options={({ route }) => ({headerBackTitle: "Back", title: "Video Call", headerRight: () => (<View style={{flexDirection:"row"}}><FontAwesome name={this.state.videoLiked?"star":"star-o"} size={28} style={{marginHorizontal: 10, marginTop: 2}} onPress={() => {this.clickVideoLike()}} color={"rgb(10, 132, 255)"} /><Feather name="download" size={28} style={{marginHorizontal: 10, marginTop: 2}} onPress={() => {this.clickVideoDownload()}} color={"rgb(10, 132, 255)"} /></View>) })} />
         <Stack.Screen name="ForgotPassword" options={{headerShown: false}} component={ForgotPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
 }
 
 const styles = StyleSheet.create({

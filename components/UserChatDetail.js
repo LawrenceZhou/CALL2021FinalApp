@@ -11,42 +11,92 @@ import { Audio, Video, AVPlaybackStatus } from 'expo-av';
 import { MessageBox } from 'react-chat-elements/native';
 
 
-export default class ChatDetail extends Component {
+export default class UserChatDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
       sound: null,
       isRecording: false,
-      messages: [{
+      messages: [
+      {
         _id: 1,
-        text: 'Let\'s go on our grammar lesson!',
-        createdAt: new Date(),
+        text: 'See you next Thursday!',
+        createdAt: new Date('January 9, 2022 15:12:00'),
         user: {
-          _id: 2,
-          name: 'React Native',
+          _id: firebase.auth().currentUser.email,
+          name: 'Lawrence Zhou',
           avatar: 'https://placeimg.com/140/140/any',
         },
-        image: 'https://picsum.photos/706',
       },
       {
         _id: 2,
-        createdAt: new Date(),
+        text: 'No problem!',
+        createdAt: new Date('January 9, 2022 15:12:00'),
         user: {
-          _id: 2,
-          name: 'React Native',
+          _id: firebase.auth().currentUser.email,
+          name: 'Lawrence Zhou',
           avatar: 'https://placeimg.com/140/140/any',
         },
-        image: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/screenshot.jpg',
       },
-      { _id: 3, 
-        createdAt: new Date(),
-        audio: "https://s3.us-east-2.amazonaws.com/storage-app-dev/mp3/cb62d4ctnk8uibk1v.mp3", 
+      {
+        _id: 3,
+        text: "How about next Thursday 13:30?",
+        createdAt: new Date('January 9, 2022 15:10:00'),
+        user: {
+          _id: 1,
+          name: 'Amrita Conner',
+          avatar: 'https://s3.us-east-2.amazonaws.com/storage-app-dev/cb62d4exdk8t4gnhf/thumbnail-26170527_10214525576748161_8444045049145038093_o.jpg',
+        },
+      },
+      {
+        _id: 4,
+        text: "Sure!",
+        createdAt: new Date('January 9, 2022 15:10:00'),
+        user: {
+          _id: 1,
+          name: 'Amrita Conner',
+          avatar: 'https://s3.us-east-2.amazonaws.com/storage-app-dev/cb62d4exdk8t4gnhf/thumbnail-26170527_10214525576748161_8444045049145038093_o.jpg',
+        },
+      },
+      {
+        _id: 5,
+        text: 'Can we make an appointment?',
+        createdAt: new Date('January 9, 2022 15:07:00'),
+        user: {
+          _id: firebase.auth().currentUser.email,
+          name: 'Lawrence Zhou',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
+      {
+        _id: 6,
+        text: 'I hope to talk to you about revising my research proposal',
+        createdAt: new Date('January 9, 2022 15:07:00'),
+        user: {
+          _id: firebase.auth().currentUser.email,
+          name: 'Lawrence Zhou',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
+      { _id: 7, 
+        createdAt: new Date('January 9, 2022 15:06:00'),
+        text: "Hey Lawrence, what can I do for you?", 
         user: 
-          { _id: 2, 
+          { _id: 1, 
             avatar: "https://s3.us-east-2.amazonaws.com/storage-app-dev/cb62d4exdk8t4gnhf/thumbnail-26170527_10214525576748161_8444045049145038093_o.jpg", 
-            name: "Zach H"
+            name: "Amrita Conner"
           },
         },
+        {
+        _id: 8,
+        text: 'Hi Am!',
+        createdAt: new Date('January 9, 2022 15:01:00'),
+        user: {
+          _id: firebase.auth().currentUser.email,
+          name: 'Lawrence Zhou',
+          avatar: 'https://placeimg.com/140/140/any',
+        },
+      },
     ],
     };
 
@@ -68,7 +118,7 @@ setRecording(recording){
 
   // 1.
 _get_ref() {
-  return firebase.database().ref('messages');
+  return firebase.database().ref('messagesUser');
 }
 // 2.
 on = (callback) => {

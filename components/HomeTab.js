@@ -32,7 +32,6 @@ import Home from "./Home";
 import Login from "./Login";
 import ChatLists from "./ChatLists";
 import Forum from "./Forum";
-import ChatDetail from "./ChatDetail";
 import Me from "./Me";
 
 

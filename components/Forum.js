@@ -57,7 +57,7 @@ const Questions = {
     {
       title: "How do you say this in English (US)? 氷少なめでお願いします。（Starbucks でアイスコーヒー頼む時）",
       tag: "Life",
-      responses: 1,
+      responses: 6,
     },
     {
       title: "Is the use of 'ASAP' common in daily life?",

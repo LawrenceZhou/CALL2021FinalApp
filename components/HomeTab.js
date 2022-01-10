@@ -50,7 +50,7 @@ export default class HomeTab extends Component {
     return (
     <Tab.Navigator tabBarOptions={{ activeTintColor:'blue', inactiveTintColor: "grey"}} >
       <Tab.Screen name="Groups" component={Home} options={{ tabBarIcon:({color, focused}) => (<Ionicon  size={30} color={color} focused={focused} name="ios-chatbubbles" />)}}/>
-      <Tab.Screen name="Chat" component={ChatLists}  options={{ tabBarIcon:({color, focused}) => (<MaterialCommunityIcon size={30}  color={color} focused={focused}  name="chat" />) }}/>
+      <Tab.Screen name="Consulation" component={ChatLists}  options={{ tabBarIcon:({color, focused}) => (<MaterialCommunityIcon size={30}  color={color} focused={focused}  name="chat" />) }}/>
       <Tab.Screen name="Forum" component={Forum} options={{ tabBarIcon:({color, focused}) => (<MaterialCommunityIcon  size={30}  color={color} focused={focused} name="bulletin-board" />) }}/>
       <Tab.Screen name="Me" component={Me} options={{ tabBarIcon:({color, focused}) => (<Ionicon  color={color} focused={focused}  size={30} name="ios-person" />) }} />
     </Tab.Navigator>

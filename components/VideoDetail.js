@@ -215,16 +215,12 @@ append= (message) => {this.ref.push(message)};
     return (
      
     <View >
-      <Video
-        ref={this.video}
-        style={styles.video}
+      <Image
+        style={styles.image}
         source={{
-          uri: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/pexels-polina-kovaleva-6265961.mp4',
+          uri: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/call.JPG',
         }}
         resizeMode="contain"
-        isLooping
-        shouldPlay
-        onPlaybackStatusUpdate={status => this.setStatus(status)}
       />
     </View>
     );
@@ -237,7 +233,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#ecf0f1',
   },
-  video: {
+  image: {
     alignSelf: 'center',
     width: "100%",
     height: "100%",

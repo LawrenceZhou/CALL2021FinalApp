@@ -24,7 +24,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
       {
@@ -34,7 +34,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
       {
@@ -44,7 +44,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
 
@@ -55,7 +55,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
 
@@ -66,7 +66,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
 
@@ -77,7 +77,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
 
@@ -88,7 +88,7 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
 
@@ -110,18 +110,18 @@ export default class BotChatDetail extends Component {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
 
       {
         _id: 10,
-        text: "Hi Lawrence!\n I'm toparrot. I will help you around Topia!",
+        text: "Hi Lawrence!\n I'm Toparrot. I will help you around Topia!",
         createdAt: new Date('January 1, 2022 11:09:00'),
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       },
     ],
@@ -407,7 +407,7 @@ uploadImageToDB = async (fileURI) => {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       }
       this.append(messageBot);
@@ -417,20 +417,20 @@ uploadImageToDB = async (fileURI) => {
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       }
       this.append(messageBot);
     }
 
-    if(text=="What does serendipity mean"|| text=="What does serendipity mean?" || text=="What's the meaning of serendipity"){
+    if(text=="Serendipity"|| text=="What does serendipity mean"|| text=="What does serendipity mean?" || text=="What's the meaning of serendipity"){
       var messageBot={
         text: 'serendipity [ ser-uhn-dip-i-tee ]\n noun\n 1. an aptitude for making desirable discoveries by accident. \n 2. good fortune; luck.',
         timestamp: new Date(),
         user: {
           _id: 1,
           name: 'Topparot',
-          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/kisspng-bird-character-cartoon-clip-art-parrot-5ab40571e33058.9803735515217473139306.png',
+          avatar: 'https://museumpalazzo.s3.us-west-2.amazonaws.com/topia.png',
         },
       }
       this.append(messageBot);

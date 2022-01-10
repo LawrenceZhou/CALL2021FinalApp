@@ -29,7 +29,7 @@ import * as ImagePicker from "expo-image-picker";
 
 const users = [
   {identity: "tutor",
-  name: "Amrita Conner",
+  name: "Amrita Smith",
   subtitle: "See you next Thursday!",
   statusColor: "#f5deb3",
   unread: 0,

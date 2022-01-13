@@ -32,6 +32,8 @@ if (__DEV__) {
   Clipboard.setString('')
 }
 
+console.disableYellowBox = true;
+
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
